@@ -3,146 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloudlock - Servidores de Juegos Premium</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Estilos adicionales para diseño responsivo */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f6f7;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #373d48;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 20px;
-        }
-        header nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        header nav ul li {
-            display: inline;
-            margin-right: 10px;
-        }
-        header nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-        header nav ul li a:hover {
-            text-decoration: underline;
-        }
-        main {
-            padding: 10px;
-        }
-        main section {
-            margin-bottom: 20px;
-        }
-        main h2 {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        .plan {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-        }
-        .plan h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-        .plan p {
-            margin: 5px 0;
-        }
-        .btn {
-            background-color: #007acc;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            cursor: pointer;
-            display: inline-block;
-        }
-        .btn:hover {
-            background-color: #005f8a;
-        }
-        footer {
-            background-color: #373d48;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-    </style>
+    <title>Aternos Cloudlock</title>
 </head>
 <body>
+    <h1>Aternos Cloudlock</h1>
 
-<header>
-    <h1>Cloudlock</h1>
-    <nav>
-        <ul>
-            <li><a href="#planes">Planes</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-            <li><a href="#inicio-sesion" class="btn">Iniciar Sesión</a></li>
-        </ul>
-    </nav>
-</header>
+    <!-- Formulario de registro -->
+    <h2>Registro</h2>
+    <form id="registrationForm">
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required><br>
+        <button type="submit">Registrarse</button>
+    </form>
 
-<main>
-    <section id="planes">
-        <div class="container">
-            <h2>Planes de Cloudlock</h2>
-            <div class="plan">
-                <h3>Plan Básico</h3>
-                <p>1 GB de RAM - SSD 6GB - CPU 20%</p>
-                <p>1 Backup mensual</p>
-                <p>Precio: $3/mes</p>
-                <a href="#comprar" class="btn">Comprar Ahora</a>
-            </div>
-            <div class="plan">
-                <h3>Plan Avanzado</h3>
-                <p>4 GB de RAM - SSD 24GB - CPU 50%</p>
-                <p>4 Backups mensuales /p>
-                <p>Precio: $7/mes</p>
-                <a href="#comprar" class="btn">Comprar Ahora</a>
-            </div>
-            <div class="plan">
-                <h3>Plan Premium</h3>
-                <p>8 GB de RAM - SSD 48GB - CPU 70%</p>
-                <p>Backup diario</p>
-                <p>Precio: $14/mes</p>
-                <a href="#comprar" class="btn">Comprar Ahora</a>
-            </div>
-            <div class="plan">
-                <h3>Plan Cloudlock Plus</h3>
-                <p>12 GB de RAM - SSD 72GB - CPU 100%</p>
-                <p>10 Backups mensuales</p>
-                <p>Precio: $23/mes</p>
-                <a href="#comprar" class="btn">Comprar Ahora</a>
-            </div>
-        </div>
-    </section>
+    <!-- Script JavaScript para enviar datos del formulario -->
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
-    <section id="contacto">
-        <div class="container">
-            <h2>Contacto</h2>
-            <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
-            <p>Email: info@cloudlock.com</p>
-        </div>
-    </section>
-</main>
-
-<footer>
-    <p>&copy; Cloudlock</p>
-</footer>
-
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error interno del servidor');
+            });
+        });
+    </script>
 </body>
-  </html>
+</html>
